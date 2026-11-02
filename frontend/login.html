@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · CivicFlow</title>
+  <meta name="description" content="Sign in to CivicFlow to track complaints, discover city services and vote in community polls.">
+  <meta name="theme-color" content="#142d4e">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="auth-page">
+  <a class="skip-link" href="#auth-form">Skip to sign in</a>
+  <div class="auth-shell">
+    <aside class="auth-aside">
+      <a class="brand brand-light" href="index.html" aria-label="CivicFlow home">
+        <span class="brand-mark"><span data-icon="shield" data-icon-size="20"></span></span>
+        <span class="brand-word"><span class="brand-name">Civic<span>Flow</span></span><span class="brand-tagline">Smart city services</span></span>
+      </a>
+
+      <div class="auth-aside-copy">
+        <p class="eyebrow eyebrow-light">Citizen &amp; city workspace</p>
+        <h2>One account.<br><span class="accent">Every civic record.</span></h2>
+        <p>Track your complaints from submission to resolution, discover published city services and take part in community polls — all in one accountable place.</p>
+        <div class="auth-points">
+          <span class="auth-point"><span data-icon="clipboard" data-icon-size="17"></span>Follow each complaint with a permanent tracking ID</span>
+          <span class="auth-point"><span data-icon="bell" data-icon-size="17"></span>Receive a notification whenever the status changes</span>
+          <span class="auth-point"><span data-icon="vote" data-icon-size="17"></span>Vote once per citizen in open community polls</span>
+          <span class="auth-point"><span data-icon="shield" data-icon-size="17"></span>Your contact details stay private from other residents</span>
+        </div>
+      </div>
+
+      <div class="auth-aside-foot">
+        <span>© <span data-current-year></span> CivicFlow</span>
+        <a href="services.html" style="color:#cfe0dc">Browse city services</a>
+      </div>
+    </aside>
+
+    <main class="auth-main">
+      <div class="auth-main-inner">
+        <a class="auth-back" href="index.html"><span data-icon="arrow-left" data-icon-size="14"></span>Back to CivicFlow</a>
+
+        <div class="auth-heading">
+          <h1>Sign in</h1>
+          <p>Use the email address and password linked to your CivicFlow account.</p>
+        </div>
+
+        <div class="alert alert-info" id="already-signed-in" hidden style="margin-top:18px">
+          <span data-icon="info" data-icon-size="17"></span>
+          <div class="grow">You are already signed in. <a class="link" id="continue-link" href="citizen-dashboard.html">Continue to your dashboard</a></div>
+        </div>
+
+        <form class="auth-form" id="login-form" novalidate>
+          <div class="form-error-summary" id="login-summary" hidden role="alert"></div>
+
+          <div class="field">
+            <label for="email">Email address</label>
+            <div class="input-group">
+              <span data-icon="mail" data-icon-size="17"></span>
+              <input class="input" type="email" id="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
+            </div>
+            <p class="field-help" id="email-help">Use the address registered with your city account.</p>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="input-group">
+              <span data-icon="lock" data-icon-size="17"></span>
+              <input class="input" type="password" id="password" name="password" autocomplete="current-password" placeholder="Your password" required>
+              <button class="input-action" type="button" data-toggle-password aria-label="Show password" aria-pressed="false">
+                <span data-icon="eye" data-icon-size="17"></span>
+              </button>
+            </div>
+            <p class="field-help"><a href="register.html">Need an account? Register as a citizen</a></p>
+          </div>
+
+          <button class="btn btn-primary btn-lg btn-block" type="submit" id="login-submit">
+            <span class="btn-label">Sign in securely</span>
+          </button>
+
+          <p class="auth-form-message" id="login-message" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="auth-divider">New to CivicFlow?</div>
+        <a class="btn btn-secondary btn-block" href="register.html">Create a citizen account</a>
+
+        <div class="auth-staff-note">
+          <span data-icon="shield" data-icon-size="15"></span>
+          <span><strong>City staff access.</strong> Officer and administrator accounts are provisioned by the city administrator. Public registration always creates a citizen account.</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <noscript>
+    <div style="padding:16px;background:#fbf3e4;color:#8a5a14;text-align:center;font-size:.85rem">JavaScript is required to sign in to CivicFlow.</div>
+  </noscript>
+
+  <script src="js/icons.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

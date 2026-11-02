@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Service details · CivicFlow</title>
+  <meta name="description" content="Contact details, opening hours and location information for a published city service.">
+  <meta name="theme-color" content="#142d4e">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="services">
+  <a class="skip-link" href="#service-detail">Skip to service details</a>
+  <header class="public-header" data-public-header></header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a><span data-icon="chevron-right" data-icon-size="12"></span>
+          <a href="services.html">City services</a><span data-icon="chevron-right" data-icon-size="12"></span>
+          <span id="crumb-service" aria-current="page">Service details</span>
+        </nav>
+        <div id="service-hero" aria-live="polite">
+          <div class="skeleton skeleton-title" style="margin-top:18px;width:min(420px,70%)"></div>
+          <div class="skeleton skeleton-text" style="width:min(560px,90%)"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-sm">
+      <div class="container" id="service-detail" aria-live="polite" aria-busy="true">
+        <div class="detail-layout">
+          <div class="detail-panel">
+            <div class="skeleton skeleton-title"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text" style="width:80%"></div>
+            <div class="skeleton skeleton-card" style="margin-top:20px"></div>
+          </div>
+          <div class="detail-sidebar">
+            <div class="card card-pad"><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text" style="width:70%"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" data-public-footer></footer>
+
+  <noscript>
+    <div style="padding:16px;background:#fbf3e4;color:#8a5a14;text-align:center;font-size:.85rem">JavaScript is required to display city service details.</div>
+  </noscript>
+
+  <script src="js/icons.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/maps.js"></script>
+  <script src="js/public-nav.js"></script>
+  <script src="js/service-details.js"></script>
+</body>
+</html>

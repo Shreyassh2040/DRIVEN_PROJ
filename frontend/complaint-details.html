@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Complaint details · CivicFlow</title>
+  <meta name="description" content="Follow the full status history, officer updates and location of a complaint you submitted to the city.">
+  <meta name="theme-color" content="#142d4e">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="app-body" data-page="complaint-details">
+  <a class="skip-link" href="#main">Skip to complaint details</a>
+  <div class="app-shell" data-shell data-roles="citizen" data-title="Complaint details">
+    <aside class="app-sidebar" id="app-sidebar" aria-label="Citizen navigation"></aside>
+    <div class="sidebar-overlay" aria-hidden="true"></div>
+    <div class="app-frame">
+      <header class="app-topbar"></header>
+      <main class="app-content" id="main">
+        <div id="detail-loading">
+          <div class="skeleton skeleton-title" style="width:32%;height:16px"></div>
+          <div class="skeleton skeleton-title" style="width:62%;height:30px;margin-top:14px"></div>
+          <div class="skeleton skeleton-text" style="width:40%;margin-top:14px"></div>
+          <div class="detail-grid mt-24">
+            <div class="detail-main">
+              <div class="skeleton skeleton-card" style="height:230px"></div>
+              <div class="skeleton skeleton-card" style="height:300px"></div>
+            </div>
+            <div class="detail-aside"><div class="skeleton skeleton-card" style="height:340px"></div></div>
+          </div>
+        </div>
+
+        <div id="detail-error" hidden></div>
+
+        <div id="detail-content" hidden>
+          <div class="detail-head">
+            <div class="detail-head-main">
+              <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="citizen-dashboard.html">Dashboard</a><span data-icon="chevron-right" data-icon-size="12"></span><a href="my-complaints.html">My complaints</a><span data-icon="chevron-right" data-icon-size="12"></span><span aria-current="page" id="head-crumb">Complaint</span>
+              </nav>
+              <div class="cluster">
+                <span class="track-code lg" id="head-tracking"></span>
+                <span id="head-status"></span>
+                <span id="head-priority"></span>
+                <span class="badge badge-neutral" id="head-category"></span>
+              </div>
+              <h1 id="head-title">Complaint</h1>
+              <div class="detail-head-sub">
+                <span id="head-submitted"></span>
+                <span id="head-updated"></span>
+                <span id="head-officer"></span>
+              </div>
+            </div>
+            <div class="detail-head-actions">
+              <button class="btn btn-secondary btn-sm" type="button" id="copy-reference">
+                <span data-icon="copy" data-icon-size="14"></span>Copy tracking ID
+              </button>
+              <a class="btn btn-primary btn-sm" href="report-issue.html">
+                <span data-icon="plus-circle" data-icon-size="14"></span>Report another
+              </a>
+            </div>
+          </div>
+
+          <section class="panel" aria-label="Complaint progress">
+            <div class="panel-body" id="status-progress"></div>
+          </section>
+
+          <div class="detail-grid mt-24">
+            <div class="detail-main">
+              <section class="panel" aria-labelledby="details-title">
+                <div class="panel-header with-border">
+                  <div>
+                    <h2 class="panel-title" id="details-title">Complaint details</h2>
+                    <p class="panel-subtitle">The information you submitted and the location recorded.</p>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <p class="description-block" id="complaint-description"></p>
+
+                  <div id="photo-section" hidden>
+                    <div class="photo-frame mt-16" id="photo-frame">
+                      <div class="map-fallback" style="min-height:200px"><span class="spinner dark" role="status" aria-label="Loading photograph"></span><p class="text-xs muted">Loading photograph…</p></div>
+                      <div class="photo-frame-cap">
+                        <span><span data-icon="lock" data-icon-size="13"></span>Only you and authorised city staff can view this photograph.</span>
+                        <a class="text-link" id="photo-open" href="#" target="_blank" rel="noopener noreferrer">Open full size<span data-icon="external-link" data-icon-size="13"></span></a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <dl class="info-grid mt-16" id="detail-info"></dl>
+                </div>
+              </section>
+
+              <section class="panel" aria-labelledby="map-title">
+                <div class="panel-header with-border">
+                  <div>
+                    <h2 class="panel-title" id="map-title">Reported location</h2>
+                    <p class="panel-subtitle" id="map-subtitle">Location recorded with this complaint.</p>
+                  </div>
+                  <a class="btn btn-ghost btn-sm" id="map-directions" href="#" target="_blank" rel="noopener noreferrer" hidden>
+                    <span data-icon="navigation" data-icon-size="14"></span>Directions
+                  </a>
+                </div>
+                <div class="panel-body flush">
+                  <div class="map-frame"><div class="map-canvas" id="complaint-map"></div></div>
+                </div>
+              </section>
+
+              <section class="panel" aria-labelledby="timeline-title">
+                <div class="panel-header with-border">
+                  <div>
+                    <h2 class="panel-title" id="timeline-title">Activity timeline</h2>
+                    <p class="panel-subtitle">Status changes, assignments and public updates from city staff.</p>
+                  </div>
+                </div>
+                <div class="panel-body" id="complaint-timeline" aria-live="polite">
+                  <div class="skeleton skeleton-row"></div>
+                  <div class="skeleton skeleton-row"></div>
+                  <div class="skeleton skeleton-row"></div>
+                </div>
+              </section>
+            </div>
+
+            <aside class="detail-aside">
+              <section class="panel" aria-labelledby="status-title">
+                <div class="panel-header with-border">
+                  <h2 class="panel-title" id="status-title">Status &amp; assignment</h2>
+                </div>
+                <div class="panel-body">
+                  <dl class="info-grid" id="side-info"></dl>
+                </div>
+              </section>
+
+              <section class="panel" id="resolution-panel" hidden aria-labelledby="resolution-title">
+                <div class="panel-header with-border">
+                  <h2 class="panel-title" id="resolution-title">Resolution</h2>
+                </div>
+                <div class="panel-body">
+                  <div class="resolution-block">
+                    <h4><span data-icon="check-circle" data-icon-size="15"></span>Officer resolution summary</h4>
+                    <p id="resolution-summary"></p>
+                  </div>
+                </div>
+              </section>
+
+              <section class="panel" aria-labelledby="reference-title">
+                <div class="panel-header with-border">
+                  <h2 class="panel-title" id="reference-title">Complaint reference</h2>
+                </div>
+                <div class="panel-body">
+                  <p class="text-sm muted">Use your tracking ID when contacting the city about this complaint.</p>
+                  <div class="copy-field mt-12">
+                    <div class="field">
+                      <label class="sr-only" for="reference-code">Tracking ID</label>
+                      <div class="input-group">
+                        <span data-icon="hash" data-icon-size="16"></span>
+                        <input class="input" type="text" id="reference-code" readonly>
+                        <button class="input-action" type="button" id="copy-reference-2" aria-label="Copy tracking ID" title="Copy tracking ID">
+                          <span data-icon="copy" data-icon-size="16"></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="form-note mt-12">Public updates are also sent to your CivicFlow notifications.</p>
+                  <a class="text-link mt-12" href="notifications.html">Open notifications<span data-icon="arrow-right" data-icon-size="14"></span></a>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/maps.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/complaint-details.js"></script>
+</body>
+</html>

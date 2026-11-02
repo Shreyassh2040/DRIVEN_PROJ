@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profile &amp; security · CivicFlow</title>
+  <meta name="description" content="Update your CivicFlow profile details and change your account password.">
+  <meta name="theme-color" content="#142d4e">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="app-body" data-page="profile">
+  <a class="skip-link" href="#main">Skip to profile settings</a>
+  <div class="app-shell" data-shell data-title="Profile &amp; security">
+    <aside class="app-sidebar" id="app-sidebar" aria-label="Workspace navigation"></aside>
+    <div class="sidebar-overlay" aria-hidden="true"></div>
+    <div class="app-frame">
+      <header class="app-topbar"></header>
+      <main class="app-content" id="main">
+        <div class="page-head">
+          <div class="page-head-copy">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+              <a href="citizen-dashboard.html">Workspace</a><span data-icon="chevron-right" data-icon-size="12"></span><span aria-current="page">Profile &amp; security</span>
+            </nav>
+            <h1 class="page-title">Profile &amp; security</h1>
+            <p class="page-desc">Keep your contact details current so the city can reach you about your complaints, and protect your account with a strong password.</p>
+          </div>
+        </div>
+
+        <div class="profile-grid">
+          <aside>
+            <section class="panel profile-card" aria-labelledby="profile-name">
+              <div class="profile-avatar" id="profile-avatar" aria-hidden="true">—</div>
+              <h2 id="profile-name">Loading…</h2>
+              <p class="profile-role" id="profile-role">—</p>
+              <div id="profile-badge" class="mt-8"></div>
+
+              <div class="profile-facts" id="profile-facts">
+                <div class="skeleton skeleton-row"></div>
+                <div class="skeleton skeleton-row"></div>
+                <div class="skeleton skeleton-row"></div>
+              </div>
+            </section>
+
+            <section class="panel mt-16">
+              <div class="panel-header">
+                <h2 class="panel-title">Session</h2>
+              </div>
+              <div class="panel-body">
+                <p class="text-sm muted">Signed in on this device. Choose sign out if you are using a shared or public computer.</p>
+                <button class="btn btn-secondary btn-sm btn-block mt-16" type="button" data-logout>
+                  <span data-icon="logout" data-icon-size="15"></span>Sign out
+                </button>
+              </div>
+            </section>
+          </aside>
+
+          <div class="section-stack">
+            <section class="panel" aria-labelledby="details-title">
+              <div class="panel-header with-border">
+                <div>
+                  <h2 class="panel-title" id="details-title">Personal details</h2>
+                  <p class="panel-subtitle">Your name and phone number are visible only to authorised city staff.</p>
+                </div>
+              </div>
+              <div class="panel-body">
+                <form id="profile-form" novalidate>
+                  <div class="form-grid">
+                    <div class="field form-span-2">
+                      <label for="full-name">Full name <span class="required">*</span></label>
+                      <input class="input" type="text" id="full-name" name="full_name" autocomplete="name" maxlength="120" required>
+                    </div>
+                    <div class="field">
+                      <label for="email">Email address</label>
+                      <input class="input" type="email" id="email" name="email" disabled>
+                      <p class="field-help">Contact the city administrator to change your sign-in email.</p>
+                    </div>
+                    <div class="field">
+                      <label for="phone">Phone number</label>
+                      <input class="input" type="tel" id="phone" name="phone" autocomplete="tel" maxlength="30" placeholder="+1 555 0100">
+                      <p class="field-help">Optional. Used only to contact you about your reports.</p>
+                    </div>
+                    <div class="field form-span-2" id="department-field" hidden>
+                      <label for="department">Department</label>
+                      <input class="input" type="text" id="department" name="department" disabled>
+                      <p class="field-help">Managed by the city administrator.</p>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <button class="btn btn-primary" type="submit" id="save-profile">
+                      <span class="btn-label">Save profile details</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </section>
+
+            <section class="panel" aria-labelledby="security-title">
+              <div class="panel-header with-border">
+                <div>
+                  <h2 class="panel-title" id="security-title">Password</h2>
+                  <p class="panel-subtitle">Use at least 8 characters. A longer, unique passphrase is strongest.</p>
+                </div>
+              </div>
+              <div class="panel-body">
+                <form id="password-form" novalidate>
+                  <div class="form-grid">
+                    <div class="field form-span-2">
+                      <label for="current-password">Current password <span class="required">*</span></label>
+                      <div class="input-group">
+                        <span data-icon="lock" data-icon-size="17"></span>
+                        <input class="input" type="password" id="current-password" name="current_password" autocomplete="current-password" required>
+                        <button class="input-action" type="button" data-toggle-password aria-label="Show password" aria-pressed="false" data-for="current-password">
+                          <span data-icon="eye" data-icon-size="17"></span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label for="new-password">New password <span class="required">*</span></label>
+                      <div class="input-group">
+                        <span data-icon="lock" data-icon-size="17"></span>
+                        <input class="input" type="password" id="new-password" name="new_password" autocomplete="new-password" minlength="8" required>
+                        <button class="input-action" type="button" data-toggle-password aria-label="Show new password" aria-pressed="false" data-for="new-password">
+                          <span data-icon="eye" data-icon-size="17"></span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label for="confirm-password">Confirm new password <span class="required">*</span></label>
+                      <input class="input" type="password" id="confirm-password" name="confirm_password" autocomplete="new-password" minlength="8" required>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <button class="btn btn-primary" type="submit" id="save-password">
+                      <span class="btn-label">Update password</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </section>
+
+            <section class="panel" aria-labelledby="privacy-title">
+              <div class="panel-header">
+                <h2 class="panel-title" id="privacy-title">Privacy &amp; access</h2>
+              </div>
+              <div class="panel-body">
+                <dl class="info-grid">
+                  <div class="info-item">
+                    <dt>Who can see your complaints</dt>
+                    <dd>You and authorised city officers</dd>
+                  </div>
+                  <div class="info-item">
+                    <dt>Who can see your contact details</dt>
+                    <dd>City staff handling your reports</dd>
+                  </div>
+                  <div class="info-item wide">
+                    <dt>Account role</dt>
+                    <dd>Roles are enforced on the server. Public registration always creates a citizen account; staff roles are provisioned by the city administrator.</dd>
+                  </div>
+                </dl>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/maps.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

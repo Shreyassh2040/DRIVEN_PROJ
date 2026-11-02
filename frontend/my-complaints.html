@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My complaints · CivicFlow</title>
+  <meta name="description" content="Search and track every complaint you have submitted to the city, with live status filters and updates.">
+  <meta name="theme-color" content="#142d4e">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="app-body" data-page="my-complaints">
+  <a class="skip-link" href="#main">Skip to complaint list</a>
+  <div class="app-shell" data-shell data-roles="citizen" data-title="My complaints">
+    <aside class="app-sidebar" id="app-sidebar" aria-label="Citizen navigation"></aside>
+    <div class="sidebar-overlay" aria-hidden="true"></div>
+    <div class="app-frame">
+      <header class="app-topbar"></header>
+      <main class="app-content" id="main">
+        <div class="page-head">
+          <div class="page-head-copy">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+              <a href="citizen-dashboard.html">Dashboard</a><span data-icon="chevron-right" data-icon-size="12"></span><span aria-current="page">My complaints</span>
+            </nav>
+            <h1 class="page-title">My complaints</h1>
+            <p class="page-desc">Every complaint you submit is listed here with its current status, assigned officer and latest public update.</p>
+          </div>
+          <div class="page-head-actions">
+            <a class="btn btn-primary" href="report-issue.html">
+              <span data-icon="plus-circle" data-icon-size="16"></span>Report an issue
+            </a>
+          </div>
+        </div>
+
+        <section class="metric-grid" id="complaint-summary" aria-label="Complaint summary" aria-live="polite">
+          <div class="stat-card"><div class="skeleton skeleton-text" style="width:56%"></div><div class="skeleton skeleton-title" style="width:34%;height:30px"></div></div>
+          <div class="stat-card"><div class="skeleton skeleton-text" style="width:56%"></div><div class="skeleton skeleton-title" style="width:34%;height:30px"></div></div>
+          <div class="stat-card"><div class="skeleton skeleton-text" style="width:56%"></div><div class="skeleton skeleton-title" style="width:34%;height:30px"></div></div>
+          <div class="stat-card"><div class="skeleton skeleton-text" style="width:56%"></div><div class="skeleton skeleton-title" style="width:34%;height:30px"></div></div>
+        </section>
+
+        <section class="mt-24" aria-labelledby="complaint-list-title">
+          <div class="section-title-row">
+            <div>
+              <h2 id="complaint-list-title">Complaint history</h2>
+              <p id="results-summary" role="status" aria-live="polite">Loading your complaints…</p>
+            </div>
+            <button class="btn btn-ghost btn-sm" type="button" id="refresh-list">
+              <span data-icon="refresh" data-icon-size="14"></span>Refresh
+            </button>
+          </div>
+
+          <div class="filter-bar" role="search">
+            <div class="field field-wide">
+              <label class="sr-only" for="complaint-search">Search complaints</label>
+              <div class="search-box">
+                <span data-icon="search" data-icon-size="16"></span>
+                <input class="input" type="search" id="complaint-search" placeholder="Search by tracking ID, title or address" autocomplete="off">
+                <button class="search-clear" type="button" id="clear-search" aria-label="Clear search" hidden><span data-icon="x" data-icon-size="14"></span></button>
+              </div>
+            </div>
+            <div class="filter-actions">
+              <button class="btn btn-secondary" type="button" id="clear-filters">Clear filters</button>
+            </div>
+          </div>
+
+          <div class="filter-chips mt-16" id="status-filters" role="group" aria-label="Filter complaints by status"></div>
+
+          <div class="complaint-list mt-16" id="complaint-list" aria-live="polite" aria-busy="true">
+            <div class="skeleton skeleton-row"></div>
+            <div class="skeleton skeleton-row"></div>
+            <div class="skeleton skeleton-row"></div>
+          </div>
+
+          <div id="list-pagination"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/maps.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/my-complaints.js"></script>
+</body>
+</html>

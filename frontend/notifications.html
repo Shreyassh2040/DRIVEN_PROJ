@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notifications · CivicFlow</title>
+  <meta name="description" content="Read updates about your complaints and city polls in your CivicFlow notification centre.">
+  <meta name="theme-color" content="#142d4e">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="app-body" data-page="notifications">
+  <a class="skip-link" href="#main">Skip to notifications</a>
+  <div class="app-shell" data-shell data-title="Notifications">
+    <aside class="app-sidebar" id="app-sidebar" aria-label="Workspace navigation"></aside>
+    <div class="sidebar-overlay" aria-hidden="true"></div>
+    <div class="app-frame">
+      <header class="app-topbar"></header>
+      <main class="app-content" id="main">
+        <div class="page-head">
+          <div class="page-head-copy">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+              <a href="citizen-dashboard.html">Dashboard</a><span data-icon="chevron-right" data-icon-size="12"></span><span aria-current="page">Notifications</span>
+            </nav>
+            <h1 class="page-title">Notifications</h1>
+            <p class="page-desc">Status changes on your complaints, assignment updates and newly published community polls appear here.</p>
+          </div>
+          <div class="page-head-actions">
+            <button class="btn btn-secondary" type="button" id="mark-all-read" disabled>
+              <span data-icon="check-square" data-icon-size="16"></span><span class="btn-label">Mark all as read</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="section-title-row">
+          <div>
+            <h2>Your inbox</h2>
+            <p id="notification-summary" role="status" aria-live="polite">Loading notifications…</p>
+          </div>
+          <button class="btn btn-ghost btn-sm" type="button" id="refresh-notifications">
+            <span data-icon="refresh" data-icon-size="14"></span>Refresh
+          </button>
+        </div>
+
+        <div class="filter-chips" id="notification-filters" role="group" aria-label="Filter notifications">
+          <button class="filter-chip is-active" type="button" data-unread="false" aria-pressed="true">
+            <span data-icon="bell" data-icon-size="13"></span><span>All</span><span class="count" id="all-count">0</span>
+          </button>
+          <button class="filter-chip" type="button" data-unread="true" aria-pressed="false">
+            <span data-icon="mail" data-icon-size="13"></span><span>Unread</span><span class="count" id="unread-count">0</span>
+          </button>
+        </div>
+
+        <section class="panel notifications-panel mt-16" aria-label="Notification list">
+          <div id="notification-list" class="notification-page-list" aria-live="polite" aria-busy="true">
+            <div style="padding:18px"><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div></div>
+          </div>
+        </section>
+
+        <div id="notification-pagination"></div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/maps.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/notifications.js"></script>
+</body>
+</html>

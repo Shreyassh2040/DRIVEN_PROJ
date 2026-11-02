@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create an account · CivicFlow</title>
+  <meta name="description" content="Create a CivicFlow citizen account to report civic issues, track complaints and vote in community polls.">
+  <meta name="theme-color" content="#142d4e">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="auth-page">
+  <a class="skip-link" href="#register-form">Skip to registration</a>
+  <div class="auth-shell">
+    <aside class="auth-aside">
+      <a class="brand brand-light" href="index.html" aria-label="CivicFlow home">
+        <span class="brand-mark"><span data-icon="shield" data-icon-size="20"></span></span>
+        <span class="brand-word"><span class="brand-name">Civic<span>Flow</span></span><span class="brand-tagline">Smart city services</span></span>
+      </a>
+
+      <div class="auth-aside-copy">
+        <p class="eyebrow eyebrow-light">Join your city workspace</p>
+        <h2>Your report.<br><span class="accent">Your record.</span></h2>
+        <p>A CivicFlow citizen account gives you one place to report issues, follow the response and have a verified say in city priorities.</p>
+        <div class="auth-points">
+          <span class="auth-point"><span data-icon="camera" data-icon-size="17"></span>Attach a photo and precise location to a report</span>
+          <span class="auth-point"><span data-icon="clock" data-icon-size="17"></span>See the full status history of every complaint</span>
+          <span class="auth-point"><span data-icon="vote" data-icon-size="17"></span>Participate in polls with one account, one vote</span>
+          <span class="auth-point"><span data-icon="users" data-icon-size="17"></span>Public registration creates citizen accounts only</span>
+        </div>
+      </div>
+
+      <div class="auth-aside-foot">
+        <span>© <span data-current-year></span> CivicFlow</span>
+        <a href="services.html" style="color:#cfe0dc">Browse city services</a>
+      </div>
+    </aside>
+
+    <main class="auth-main">
+      <div class="auth-main-inner">
+        <a class="auth-back" href="index.html"><span data-icon="arrow-left" data-icon-size="14"></span>Back to CivicFlow</a>
+
+        <div class="auth-heading">
+          <h1>Create your account</h1>
+          <p>Register as a citizen to report issues, follow their progress and vote in community polls.</p>
+        </div>
+
+        <form class="auth-form" id="register-form" novalidate>
+          <div class="form-error-summary" id="register-summary" hidden role="alert"></div>
+
+          <div class="field">
+            <label for="full_name">Full name</label>
+            <div class="input-group">
+              <span data-icon="user" data-icon-size="17"></span>
+              <input class="input" type="text" id="full_name" name="full_name" autocomplete="name" placeholder="e.g. Asha Rao" minlength="2" maxlength="120" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">Email address</label>
+            <div class="input-group">
+              <span data-icon="mail" data-icon-size="17"></span>
+              <input class="input" type="email" id="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="input-group">
+              <span data-icon="lock" data-icon-size="17"></span>
+              <input class="input" type="password" id="password" name="password" autocomplete="new-password" placeholder="At least 8 characters" minlength="8" maxlength="128" required>
+              <button class="input-action" type="button" data-toggle-password aria-label="Show password" aria-pressed="false">
+                <span data-icon="eye" data-icon-size="17"></span>
+              </button>
+            </div>
+            <div class="password-meter" id="password-meter" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <p class="field-help" id="password-help">Use at least 8 characters. A mix of letters and numbers is recommended.</p>
+          </div>
+
+          <div class="field">
+            <label for="confirm_password">Confirm password</label>
+            <div class="input-group">
+              <span data-icon="lock" data-icon-size="17"></span>
+              <input class="input" type="password" id="confirm_password" name="confirm_password" autocomplete="new-password" placeholder="Repeat your password" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="check-field" for="acknowledge">
+              <input type="checkbox" id="acknowledge" name="acknowledge" required>
+              <span>I understand this is a citizen account and that complaint details may be shared with municipal staff to respond to my report.</span>
+            </label>
+          </div>
+
+          <button class="btn btn-primary btn-lg btn-block" type="submit" id="register-submit">
+            <span class="btn-label">Create citizen account</span>
+          </button>
+
+          <p class="auth-form-message" id="register-message" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="auth-switch">Already have an account? <a href="login.html">Sign in</a></p>
+
+        <div class="auth-staff-note">
+          <span data-icon="shield" data-icon-size="15"></span>
+          <span><strong>Need officer access?</strong> Municipal officers and administrators cannot self-register. Ask the city administrator to provision your account.</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <noscript>
+    <div style="padding:16px;background:#fbf3e4;color:#8a5a14;text-align:center;font-size:.85rem">JavaScript is required to create a CivicFlow account.</div>
+  </noscript>
+
+  <script src="js/icons.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

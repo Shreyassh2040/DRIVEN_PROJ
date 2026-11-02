@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Officer dashboard · CivicFlow</title>
+  <meta name="description" content="Municipal officer operations console for triaging complaints, assignments, citizen updates and response performance.">
+  <meta name="theme-color" content="#142d4e">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="app-body" data-page="officer-dashboard">
+  <a class="skip-link" href="#main">Skip to officer dashboard</a>
+  <div class="app-shell" data-shell data-roles="officer,admin" data-title="Officer dashboard">
+    <aside class="app-sidebar" id="app-sidebar" aria-label="Operations navigation"></aside>
+    <div class="sidebar-overlay" aria-hidden="true"></div>
+    <div class="app-frame">
+      <header class="app-topbar"></header>
+      <main class="app-content" id="main">
+        <nav class="admin-tabs" aria-label="Officer sections">
+          <div class="tabs" role="tablist">
+            <a class="tab is-active" href="#overview" role="tab" data-officer-tab="overview" aria-selected="true">
+              <span data-icon="dashboard" data-icon-size="14"></span>Overview
+            </a>
+            <a class="tab" href="#queue" role="tab" data-officer-tab="queue" aria-selected="false">
+              <span data-icon="inbox" data-icon-size="14"></span>Complaint queue
+            </a>
+            <a class="tab" href="#performance" role="tab" data-officer-tab="performance" aria-selected="false">
+              <span data-icon="bar-chart" data-icon-size="14"></span>Performance
+            </a>
+          </div>
+        </nav>
+
+        <div class="page-head">
+          <div class="page-head-copy">
+            <p class="eyebrow">Municipal operations</p>
+            <h1 class="page-title">Complaint operations</h1>
+            <p class="page-desc">Triage incoming reports, assign responsible officers and keep citizens informed with clear public updates.</p>
+          </div>
+          <div class="page-head-actions">
+            <button class="btn btn-secondary" type="button" id="refresh-officer">
+              <span data-icon="refresh" data-icon-size="16"></span>Refresh data
+            </button>
+            <a class="btn btn-primary" href="officer-dashboard.html#queue">
+              <span data-icon="inbox" data-icon-size="16"></span>Open queue
+            </a>
+          </div>
+        </div>
+
+        <section id="officer-overview" data-officer-section="overview">
+          <div class="metric-grid" id="officer-metrics" aria-live="polite">
+            <div class="stat-card"><div class="skeleton skeleton-text" style="width:56%"></div><div class="skeleton skeleton-title" style="width:34%;height:30px"></div></div>
+            <div class="stat-card"><div class="skeleton skeleton-text" style="width:56%"></div><div class="skeleton skeleton-title" style="width:34%;height:30px"></div></div>
+            <div class="stat-card"><div class="skeleton skeleton-text" style="width:56%"></div><div class="skeleton skeleton-title" style="width:34%;height:30px"></div></div>
+            <div class="stat-card"><div class="skeleton skeleton-text" style="width:56%"></div><div class="skeleton skeleton-title" style="width:34%;height:30px"></div></div>
+          </div>
+
+          <div class="dash-grid wide-left mt-24">
+            <div class="dash-main">
+              <section class="panel" aria-labelledby="volume-title">
+                <div class="chart-head">
+                  <div>
+                    <h2 class="panel-title" id="volume-title">Complaint volume</h2>
+                    <p class="panel-subtitle">New complaints recorded over the last six months.</p>
+                  </div>
+                </div>
+                <div class="chart-panel-body" id="officer-trend">
+                  <div class="skeleton skeleton-card" style="height:220px"></div>
+                </div>
+              </section>
+
+              <section class="panel" aria-labelledby="recent-officer-title">
+                <div class="panel-header with-border">
+                  <div>
+                    <h2 class="panel-title" id="recent-officer-title">Latest complaints</h2>
+                    <p class="panel-subtitle">The most recent reports across the city.</p>
+                  </div>
+                  <a class="text-link" href="#queue">Open full queue<span data-icon="arrow-right" data-icon-size="14"></span></a>
+                </div>
+                <div class="panel-body flush" id="officer-recent">
+                  <div style="padding:18px"><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div></div>
+                </div>
+              </section>
+            </div>
+
+            <aside class="dash-side">
+              <section class="panel" aria-labelledby="open-work-title">
+                <div class="panel-header with-border">
+                  <div>
+                    <h2 class="panel-title" id="open-work-title">Open work</h2>
+                    <p class="panel-subtitle">Current status of the municipal queue.</p>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <div class="mini-metrics">
+                    <div class="mini-metric"><span>Open</span><strong id="mini-open">—</strong></div>
+                    <div class="mini-metric"><span>Unassigned</span><strong id="mini-unassigned">—</strong></div>
+                    <div class="mini-metric"><span>Resolved</span><strong id="mini-resolved">—</strong></div>
+                  </div>
+                  <div class="mt-16" id="officer-priorities">
+                    <div class="skeleton skeleton-row"></div>
+                    <div class="skeleton skeleton-row"></div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="panel" aria-labelledby="response-title">
+                <div class="panel-header with-border">
+                  <div>
+                    <h2 class="panel-title" id="response-title">Response performance</h2>
+                    <p class="panel-subtitle">Based on resolved complaints with timestamps.</p>
+                  </div>
+                </div>
+                <div class="panel-body" id="officer-response">
+                  <div class="skeleton skeleton-row"></div>
+                  <div class="skeleton skeleton-row"></div>
+                </div>
+              </section>
+
+              <section class="panel" aria-labelledby="attention-title">
+                <div class="panel-header">
+                  <h2 class="panel-title" id="attention-title">Needs attention</h2>
+                </div>
+                <div class="panel-body">
+                  <p class="text-sm muted">Unassigned complaints remain in the queue until an officer is allocated. Assign owners from the complaint drawer.</p>
+                  <a class="btn btn-secondary btn-sm btn-block mt-16" href="#queue">Review unassigned complaints</a>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <section id="officer-queue" data-officer-section="queue" hidden>
+          <div class="section-title-row">
+            <div>
+              <h2>Complaint queue</h2>
+              <p id="queue-summary" role="status" aria-live="polite">Loading complaints…</p>
+            </div>
+            <div class="cluster">
+              <button class="btn btn-ghost btn-sm" type="button" id="refresh-queue">
+                <span data-icon="refresh" data-icon-size="14"></span>Refresh
+              </button>
+            </div>
+          </div>
+
+          <div class="filter-bar" role="search" id="queue-filters">
+            <div class="field field-wide">
+              <label for="queue-search">Search</label>
+              <div class="search-box">
+                <span data-icon="search" data-icon-size="16"></span>
+                <input class="input" type="search" id="queue-search" placeholder="Tracking ID, title, address or reporter" autocomplete="off">
+              </div>
+            </div>
+            <div class="field">
+              <label for="queue-status">Status</label>
+              <select class="select" id="queue-status">
+                <option value="">All statuses</option>
+                <option value="submitted">Submitted</option>
+                <option value="in_progress">In progress</option>
+                <option value="resolved">Resolved</option>
+                <option value="rejected">Rejected</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="queue-priority">Priority</label>
+              <select class="select" id="queue-priority">
+                <option value="">All priorities</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="queue-category">Category</label>
+              <select class="select" id="queue-category">
+                <option value="">All categories</option>
+                <option value="pothole">Pothole</option>
+                <option value="garbage">Garbage accumulation</option>
+                <option value="streetlight">Streetlight failure</option>
+                <option value="water_supply">Water supply</option>
+                <option value="drainage">Drainage</option>
+                <option value="road_damage">Road damage</option>
+                <option value="other">Other civic issue</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="queue-assigned">Assignment</label>
+              <select class="select" id="queue-assigned">
+                <option value="">All assignments</option>
+                <option value="unassigned">Unassigned</option>
+              </select>
+            </div>
+            <div class="filter-actions">
+              <button class="btn btn-secondary" type="button" id="clear-queue-filters">Clear</button>
+            </div>
+          </div>
+
+          <section class="panel mt-16" aria-label="Complaint results">
+            <div class="data-toolbar">
+              <p class="data-toolbar-copy" id="queue-count">Loading…</p>
+              <div class="data-toolbar-actions">
+                <span class="badge badge-neutral" id="queue-active-filter" hidden></span>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table class="data-table responsive" id="queue-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Complaint</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Reporter</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Assigned</th>
+                    <th scope="col">Submitted</th>
+                    <th scope="col" class="cell-actions">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="queue-body">
+                  <tr><td colspan="8" class="empty-row">Loading complaints…</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="panel-footer" id="queue-pagination"></div>
+          </section>
+        </section>
+
+        <section id="officer-performance" data-officer-section="performance" hidden>
+          <div class="metric-grid cols-3" id="performance-metrics" aria-live="polite">
+            <div class="stat-card"><div class="skeleton skeleton-text" style="width:56%"></div><div class="skeleton skeleton-title" style="width:34%;height:30px"></div></div>
+            <div class="stat-card"><div class="skeleton skeleton-text" style="width:56%"></div><div class="skeleton skeleton-title" style="width:34%;height:30px"></div></div>
+            <div class="stat-card"><div class="skeleton skeleton-text" style="width:56%"></div><div class="skeleton skeleton-title" style="width:34%;height:30px"></div></div>
+          </div>
+
+          <div class="chart-grid mt-24">
+            <section class="panel">
+              <div class="chart-head">
+                <div>
+                  <h2 class="panel-title">Monthly intake</h2>
+                  <p class="panel-subtitle">Complaints created in each of the last six months.</p>
+                </div>
+              </div>
+              <div class="chart-panel-body" id="performance-trend"><div class="skeleton skeleton-card" style="height:220px"></div></div>
+            </section>
+
+            <section class="panel">
+              <div class="chart-head">
+                <div>
+                  <h2 class="panel-title">By category</h2>
+                  <p class="panel-subtitle">All complaints grouped by civic category.</p>
+                </div>
+              </div>
+              <div class="chart-panel-body" id="performance-categories"><div class="skeleton skeleton-card" style="height:220px"></div></div>
+            </section>
+
+            <section class="panel">
+              <div class="chart-head">
+                <div>
+                  <h2 class="panel-title">By area</h2>
+                  <p class="panel-subtitle">Highest-volume localities recorded on complaints.</p>
+                </div>
+              </div>
+              <div class="chart-panel-body" id="performance-areas"><div class="skeleton skeleton-card" style="height:220px"></div></div>
+            </section>
+
+            <section class="panel">
+              <div class="chart-head">
+                <div>
+                  <h2 class="panel-title">Priority mix</h2>
+                  <p class="panel-subtitle">Current priority distribution across all complaints.</p>
+                </div>
+              </div>
+              <div class="chart-panel-body" id="performance-priorities"><div class="skeleton skeleton-card" style="height:220px"></div></div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <dialog class="drawer drawer-lg" id="complaint-drawer" aria-labelledby="drawer-title">
+    <div class="drawer-head">
+      <div>
+        <h2 class="drawer-title" id="drawer-title">Complaint</h2>
+        <p class="drawer-subtitle" id="drawer-subtitle">Loading complaint…</p>
+      </div>
+      <button class="drawer-close" type="button" data-close-drawer aria-label="Close complaint panel">
+        <span data-icon="x" data-icon-size="18"></span>
+      </button>
+    </div>
+    <div class="drawer-body" id="drawer-body">
+      <div class="empty-state"><span class="spinner dark" role="status" aria-label="Loading complaint"></span></div>
+    </div>
+  </dialog>
+
+  <script src="js/icons.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/maps.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/officer-dashboard.js"></script>
+</body>
+</html>

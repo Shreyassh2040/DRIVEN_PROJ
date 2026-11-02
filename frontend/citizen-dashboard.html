@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard · CivicFlow</title>
+  <meta name="description" content="Your CivicFlow citizen workspace: track complaints, vote in community polls and discover city services.">
+  <meta name="theme-color" content="#142d4e">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="app-body" data-page="citizen-dashboard">
+  <a class="skip-link" href="#main">Skip to dashboard content</a>
+  <div class="app-shell" data-shell data-roles="citizen" data-title="Dashboard">
+    <aside class="app-sidebar" id="app-sidebar" aria-label="Citizen navigation"></aside>
+    <div class="sidebar-overlay" aria-hidden="true"></div>
+    <div class="app-frame">
+      <header class="app-topbar"></header>
+      <main class="app-content" id="main">
+        <div class="page-head">
+          <div class="page-head-copy">
+            <p class="eyebrow" id="greeting-line">Citizen workspace</p>
+            <h1 class="page-title" id="dashboard-title">Your city dashboard</h1>
+            <p class="page-desc">Report problems, follow every update on your complaints and take part in the decisions shaping your neighbourhood.</p>
+          </div>
+          <div class="page-head-actions">
+            <a class="btn btn-secondary" href="my-complaints.html">
+              <span data-icon="clipboard" data-icon-size="16"></span>My complaints
+            </a>
+            <a class="btn btn-primary" href="report-issue.html">
+              <span data-icon="plus-circle" data-icon-size="16"></span>Report an issue
+            </a>
+          </div>
+        </div>
+
+        <section class="metric-grid" id="citizen-metrics" aria-label="Your complaint summary" aria-live="polite">
+          <div class="stat-card"><div class="skeleton skeleton-text" style="width:56%"></div><div class="skeleton skeleton-title" style="width:34%;height:30px"></div></div>
+          <div class="stat-card"><div class="skeleton skeleton-text" style="width:56%"></div><div class="skeleton skeleton-title" style="width:34%;height:30px"></div></div>
+          <div class="stat-card"><div class="skeleton skeleton-text" style="width:56%"></div><div class="skeleton skeleton-title" style="width:34%;height:30px"></div></div>
+          <div class="stat-card"><div class="skeleton skeleton-text" style="width:56%"></div><div class="skeleton skeleton-title" style="width:34%;height:30px"></div></div>
+        </section>
+
+        <div class="dash-grid wide-left mt-24">
+          <div class="dash-main">
+            <section class="panel" aria-labelledby="recent-complaints-title">
+              <div class="panel-header with-border">
+                <div>
+                  <h2 class="panel-title" id="recent-complaints-title">Recent complaints</h2>
+                  <p class="panel-subtitle">The latest reports you filed with the city.</p>
+                </div>
+                <a class="text-link" href="my-complaints.html">View all<span data-icon="arrow-right" data-icon-size="14"></span></a>
+              </div>
+              <div class="panel-body">
+                <div class="complaint-list" id="recent-complaints" aria-live="polite">
+                  <div class="skeleton skeleton-row"></div>
+                  <div class="skeleton skeleton-row"></div>
+                  <div class="skeleton skeleton-row"></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel" aria-labelledby="polls-title">
+              <div class="panel-header with-border">
+                <div>
+                  <h2 class="panel-title" id="polls-title">Community polls</h2>
+                  <p class="panel-subtitle">Open consultations from the city administration.</p>
+                </div>
+                <a class="text-link" href="polls.html">All polls<span data-icon="arrow-right" data-icon-size="14"></span></a>
+              </div>
+              <div class="panel-body">
+                <div id="dashboard-polls" aria-live="polite">
+                  <div class="skeleton skeleton-row"></div>
+                  <div class="skeleton skeleton-row"></div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <aside class="dash-side">
+            <section class="panel" aria-labelledby="services-title">
+              <div class="panel-header with-border">
+                <div>
+                  <h2 class="panel-title" id="services-title">City services</h2>
+                  <p class="panel-subtitle">Published by the administration.</p>
+                </div>
+              </div>
+              <div class="panel-body" id="dashboard-services" aria-live="polite">
+                <div class="skeleton skeleton-row"></div>
+                <div class="skeleton skeleton-row"></div>
+                <div class="skeleton skeleton-row"></div>
+              </div>
+              <div class="panel-footer">
+                <a class="text-link" href="services.html">Open service directory<span data-icon="arrow-right" data-icon-size="14"></span></a>
+              </div>
+            </section>
+
+            <section class="panel" aria-labelledby="notifications-title">
+              <div class="panel-header with-border">
+                <div>
+                  <h2 class="panel-title" id="notifications-title">Latest updates</h2>
+                  <p class="panel-subtitle">Messages about your complaints and polls.</p>
+                </div>
+              </div>
+              <div class="panel-body" id="dashboard-notifications" aria-live="polite">
+                <div class="skeleton skeleton-row"></div>
+                <div class="skeleton skeleton-row"></div>
+              </div>
+              <div class="panel-footer">
+                <a class="text-link" href="notifications.html">All notifications<span data-icon="arrow-right" data-icon-size="14"></span></a>
+              </div>
+            </section>
+
+            <section class="panel" aria-labelledby="help-title">
+              <div class="panel-header">
+                <h2 class="panel-title" id="help-title">Need a hand?</h2>
+              </div>
+              <div class="panel-body">
+                <p class="text-sm muted">Use the service directory to find the right department, or check the status timeline on any complaint for the latest officer update.</p>
+                <div class="cluster mt-16">
+                  <a class="btn btn-secondary btn-sm" href="services.html">Find a service</a>
+                  <a class="btn btn-ghost btn-sm" href="profile.html">Account settings</a>
+                </div>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/maps.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/citizen-dashboard.js"></script>
+</body>
+</html>

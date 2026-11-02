@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Report an issue · CivicFlow</title>
+  <meta name="description" content="Report a pothole, streetlight failure, drainage problem or other civic issue to your city and receive a tracking ID.">
+  <meta name="theme-color" content="#142d4e">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="app-body" data-page="report-issue">
+  <a class="skip-link" href="#main">Skip to report form</a>
+  <div class="app-shell" data-shell data-roles="citizen" data-title="Report an issue">
+    <aside class="app-sidebar" id="app-sidebar" aria-label="Citizen navigation"></aside>
+    <div class="sidebar-overlay" aria-hidden="true"></div>
+    <div class="app-frame">
+      <header class="app-topbar"></header>
+      <main class="app-content" id="main">
+        <div id="report-layout">
+          <div class="page-head">
+            <div class="page-head-copy">
+              <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="citizen-dashboard.html">Dashboard</a><span data-icon="chevron-right" data-icon-size="12"></span><a href="my-complaints.html">My complaints</a><span data-icon="chevron-right" data-icon-size="12"></span><span aria-current="page">Report an issue</span>
+              </nav>
+              <h1 class="page-title">Report a civic issue</h1>
+              <p class="page-desc">Give the response team enough detail to find and fix the problem. You will receive a tracking ID as soon as the complaint is recorded.</p>
+            </div>
+          </div>
+
+          <div class="detail-grid">
+            <div class="detail-main">
+              <form class="form-card" id="report-form" novalidate enctype="multipart/form-data">
+                <div class="form-section">
+                  <div class="form-section-head">
+                    <span class="icon-tile navy"><span data-icon="file-text" data-icon-size="16"></span></span>
+                    <div>
+                      <h2>Complaint details</h2>
+                      <p>Describe one specific issue so officers can act on it quickly.</p>
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <div class="label-row">
+                      <label for="title">Complaint title <span class="required">*</span></label>
+                      <span class="char-count" id="title-count">0 / 160</span>
+                    </div>
+                    <input class="input" type="text" id="title" name="title" maxlength="160" required placeholder="e.g. Broken streetlight outside the community centre" autocomplete="off">
+                    <p class="field-help">Use a short, specific summary. At least 4 characters.</p>
+                  </div>
+
+                  <div class="field">
+                    <label for="category">Category <span class="required">*</span></label>
+                    <select class="select" id="category" name="category" required>
+                      <option value="">Select a category</option>
+                      <option value="pothole">Pothole</option>
+                      <option value="garbage">Garbage accumulation</option>
+                      <option value="streetlight">Streetlight failure</option>
+                      <option value="water_supply">Water supply</option>
+                      <option value="drainage">Drainage</option>
+                      <option value="road_damage">Road damage</option>
+                      <option value="other">Other civic issue</option>
+                    </select>
+                    <p class="field-help">Choose the category that best matches the problem.</p>
+                  </div>
+
+                  <div class="field">
+                    <div class="label-row">
+                      <label for="description">Description <span class="required">*</span></label>
+                      <span class="char-count" id="description-count">0 / 5000</span>
+                    </div>
+                    <textarea class="textarea" id="description" name="description" maxlength="5000" required rows="6" placeholder="What is wrong, how long has it been happening, and is it blocking access or creating a safety risk?"></textarea>
+                    <p class="field-help">Include landmarks or access notes. Do not include personal details of other people.</p>
+                  </div>
+                </div>
+
+                <div class="form-section">
+                  <div class="form-section-head">
+                    <span class="icon-tile navy"><span data-icon="map-pin" data-icon-size="16"></span></span>
+                    <div>
+                      <h2>Location</h2>
+                      <p>Add an address or use your current location. At least one is required.</p>
+                    </div>
+                  </div>
+
+                  <div class="form-grid">
+                    <div class="field form-span-2">
+                      <label for="address">Address or landmark</label>
+                      <input class="input" type="text" id="address" name="address" maxlength="255" placeholder="Street, building or nearest landmark" autocomplete="street-address">
+                      <p class="field-help">Required if you do not attach coordinates.</p>
+                    </div>
+                    <div class="field">
+                      <label for="area">Area or locality</label>
+                      <input class="input" type="text" id="area" name="area" maxlength="120" placeholder="e.g. Ward 4, North Market" autocomplete="address-level2">
+                    </div>
+                  </div>
+
+                  <div class="location-grid">
+                    <div class="location-panel">
+                      <div class="location-panel-head">
+                        <h4>Use current location</h4>
+                        <span>Optional</span>
+                      </div>
+                      <p class="form-note">Your device will ask for permission. Coordinates are stored with the complaint and only shared with city staff.</p>
+                      <div class="location-actions">
+                        <button class="btn btn-secondary btn-sm" type="button" id="use-location">
+                          <span data-icon="crosshair" data-icon-size="14"></span><span class="btn-label">Use my location</span>
+                        </button>
+                        <button class="btn btn-ghost btn-sm" type="button" id="clear-location" hidden>Clear</button>
+                      </div>
+                      <p class="location-status" id="location-status" role="status" aria-live="polite">
+                        <span data-icon="info" data-icon-size="14"></span><span>No coordinates attached yet.</span>
+                      </p>
+                    </div>
+
+                    <div class="location-panel">
+                      <div class="location-panel-head">
+                        <h4>Manual coordinates</h4>
+                        <span>Optional</span>
+                      </div>
+                      <div class="coordinate-fields">
+                        <div class="field">
+                          <label for="latitude">Latitude</label>
+                          <input class="input input-sm" type="number" id="latitude" name="latitude" min="-90" max="90" step="any" inputmode="decimal" placeholder="e.g. 12.971599">
+                        </div>
+                        <div class="field">
+                          <label for="longitude">Longitude</label>
+                          <input class="input input-sm" type="number" id="longitude" name="longitude" min="-180" max="180" step="any" inputmode="decimal" placeholder="e.g. 77.594566">
+                        </div>
+                      </div>
+                      <p class="form-note">Paste coordinates from a map if you know them. Both values are needed.</p>
+                    </div>
+                  </div>
+
+                  <div id="location-preview" aria-live="polite"></div>
+                </div>
+
+                <div class="form-section">
+                  <div class="form-section-head">
+                    <span class="icon-tile navy"><span data-icon="camera" data-icon-size="16"></span></span>
+                    <div>
+                      <h2>Photograph</h2>
+                      <p>Optional. A clear photo helps the response team assess the issue.</p>
+                    </div>
+                  </div>
+
+                  <div class="upload-field">
+                    <div class="upload-zone" id="photo-zone">
+                      <input type="file" id="photo" name="photo" accept="image/jpeg,image/png,image/webp" aria-describedby="photo-hint">
+                      <span class="icon-tile"><span data-icon="upload" data-icon-size="20"></span></span>
+                      <strong>Choose a photo or drag it here</strong>
+                      <span id="photo-hint">JPEG, PNG or WebP · up to 5 MB</span>
+                    </div>
+                    <div class="upload-preview" id="photo-preview" hidden>
+                      <img id="photo-preview-image" alt="Preview of the selected complaint photograph">
+                      <div class="upload-preview-bar">
+                        <div style="min-width:0">
+                          <strong id="photo-name">Selected photo</strong>
+                          <span id="photo-size"></span>
+                        </div>
+                        <button class="btn btn-ghost btn-sm" type="button" id="remove-photo">
+                          <span data-icon="trash" data-icon-size="14"></span>Remove
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-section">
+                  <label class="check-field" for="accuracy">
+                    <input type="checkbox" id="accuracy" name="accuracy">
+                    <span>I confirm this report is accurate to the best of my knowledge and relates to a real civic issue.</span>
+                  </label>
+                </div>
+
+                <div class="form-actions between">
+                  <p class="form-actions-note">Your name and contact details are shared only with authorised city staff.</p>
+                  <div class="cluster">
+                    <a class="btn btn-ghost" href="citizen-dashboard.html">Cancel</a>
+                    <button class="btn btn-primary" type="submit" id="submit-issue">
+                      <span data-icon="send" data-icon-size="16"></span><span class="btn-label">Submit complaint</span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <aside class="detail-aside">
+              <section class="panel">
+                <div class="panel-header">
+                  <h2 class="panel-title">What happens next</h2>
+                </div>
+                <div class="panel-body">
+                  <div class="timeline">
+                    <div class="timeline-item">
+                      <div class="timeline-rail"><span class="timeline-dot is-status"><span data-icon="send" data-icon-size="12"></span></span></div>
+                      <div class="timeline-content">
+                        <p class="timeline-title">1. Complaint recorded</p>
+                        <p class="timeline-description">You receive a tracking ID and a copy of the details you submitted.</p>
+                      </div>
+                    </div>
+                    <div class="timeline-item">
+                      <div class="timeline-rail"><span class="timeline-dot"><span data-icon="user-check" data-icon-size="12"></span></span></div>
+                      <div class="timeline-content">
+                        <p class="timeline-title">2. Review and assignment</p>
+                        <p class="timeline-description">An officer reviews the report, sets a priority and assigns the responsible team.</p>
+                      </div>
+                    </div>
+                    <div class="timeline-item">
+                      <div class="timeline-rail"><span class="timeline-dot"><span data-icon="check" data-icon-size="12"></span></span></div>
+                      <div class="timeline-content">
+                        <p class="timeline-title">3. Resolution</p>
+                        <p class="timeline-description">Public updates appear on the complaint timeline and in your notifications.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="panel">
+                <div class="panel-header">
+                  <h2 class="panel-title">Report safely</h2>
+                </div>
+                <div class="panel-body">
+                  <p class="text-sm muted">For emergencies or immediate danger, contact the emergency services directly rather than filing a complaint here.</p>
+                  <p class="form-note mt-12">Photographs should show the issue, not people or private property interiors.</p>
+                  <a class="text-link mt-16" href="services.html">Find the right city service<span data-icon="arrow-right" data-icon-size="14"></span></a>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </div>
+
+        <div id="report-success" hidden>
+          <div class="confirm-card">
+            <div class="confirm-icon"><span data-icon="check" data-icon-size="30"></span></div>
+            <h1>Complaint submitted</h1>
+            <p id="success-message">Your complaint has been recorded and is waiting for officer review.</p>
+
+            <div class="copy-field">
+              <div class="field">
+                <label for="tracking-code">Your tracking ID</label>
+                <div class="input-group">
+                  <span data-icon="hash" data-icon-size="17"></span>
+                  <input class="input" type="text" id="tracking-code" readonly>
+                  <button class="input-action" type="button" id="copy-tracking" aria-label="Copy tracking ID" title="Copy tracking ID">
+                    <span data-icon="copy" data-icon-size="17"></span>
+                  </button>
+                </div>
+                <p class="field-help">Keep this ID to refer to the complaint in future correspondence.</p>
+              </div>
+            </div>
+
+            <div class="confirm-details">
+              <dl class="info-grid">
+                <div class="info-item wide">
+                  <dt>Complaint</dt>
+                  <dd id="success-title">—</dd>
+                </div>
+                <div class="info-item">
+                  <dt>Category</dt>
+                  <dd id="success-category">—</dd>
+                </div>
+                <div class="info-item">
+                  <dt>Status</dt>
+                  <dd id="success-status">Submitted</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div class="confirm-actions">
+              <a class="btn btn-primary" id="success-details" href="my-complaints.html">View complaint</a>
+              <a class="btn btn-secondary" href="report-issue.html">Report another issue</a>
+              <a class="btn btn-ghost" href="citizen-dashboard.html">Back to dashboard</a>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/maps.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/report-issue.js"></script>
+</body>
+</html>

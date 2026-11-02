@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City service directory · CivicFlow</title>
+  <meta name="description" content="Browse municipal services published by your city, including addresses, opening hours and contact details.">
+  <meta name="theme-color" content="#142d4e">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="services">
+  <a class="skip-link" href="#directory">Skip to service directory</a>
+  <header class="public-header" data-public-header></header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a><span data-icon="chevron-right" data-icon-size="12"></span><span aria-current="page">City services</span>
+        </nav>
+        <h1>City service directory</h1>
+        <p>Every service listed here is published by the city administration. Search by name, filter by category or area, and open a record for contact and location details.</p>
+      </div>
+    </section>
+
+    <section class="section-sm" id="directory">
+      <div class="container directory-layout">
+        <aside class="filter-panel" aria-label="Filter services">
+          <div class="filter-group">
+            <h3>Category</h3>
+            <div class="filter-list" id="category-filters">
+              <div class="skeleton skeleton-text" style="width:80%"></div>
+              <div class="skeleton skeleton-text" style="width:65%"></div>
+              <div class="skeleton skeleton-text" style="width:72%"></div>
+            </div>
+          </div>
+          <div class="filter-group">
+            <h3>Area</h3>
+            <div class="filter-group">
+              <select class="select select-sm" id="area-filter" aria-label="Filter by area">
+                <option value="">All areas</option>
+              </select>
+            </div>
+          </div>
+          <div class="filter-group">
+            <h3>Location</h3>
+            <p class="form-note">Sort by distance from your current location. Your coordinates stay in this browser and are only used for this search.</p>
+            <button class="btn btn-secondary btn-sm btn-block" type="button" id="near-me">
+              <span data-icon="crosshair" data-icon-size="14"></span><span class="btn-label">Use my location</span>
+            </button>
+            <button class="btn btn-ghost btn-sm btn-block" type="button" id="clear-filters">Clear all filters</button>
+          </div>
+        </aside>
+
+        <div class="directory-main">
+          <div class="directory-toolbar">
+            <div class="search-box grow">
+              <span data-icon="search" data-icon-size="16"></span>
+              <input class="input" type="search" id="service-search" placeholder="Search services, addresses or areas" aria-label="Search city services">
+            </div>
+            <select class="select" id="sort-select" aria-label="Sort services" style="width:auto;min-width:150px">
+              <option value="">Sort: Name A–Z</option>
+              <option value="newest">Sort: Recently added</option>
+              <option value="distance">Sort: Nearest first</option>
+            </select>
+          </div>
+
+          <div class="directory-results-head">
+            <p id="results-summary" aria-live="polite">Loading city services…</p>
+            <div class="cluster" id="active-filters"></div>
+          </div>
+
+          <div class="service-grid" id="service-results" aria-live="polite" aria-busy="true">
+            <div class="skeleton skeleton-card"></div>
+            <div class="skeleton skeleton-card"></div>
+            <div class="skeleton skeleton-card"></div>
+            <div class="skeleton skeleton-card"></div>
+          </div>
+
+          <div id="service-pagination"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" data-public-footer></footer>
+
+  <noscript>
+    <div style="padding:16px;background:#fbf3e4;color:#8a5a14;text-align:center;font-size:.85rem">JavaScript is required to search the CivicFlow service directory.</div>
+  </noscript>
+
+  <script src="js/icons.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/public-nav.js"></script>
+  <script src="js/services.js"></script>
+</body>
+</html>
